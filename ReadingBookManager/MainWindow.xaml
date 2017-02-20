@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ReadingBookManager"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="400" Width="525">
     <Window.Resources>
         <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
             <Setter Property="ItemTemplate">
@@ -26,7 +26,8 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid>
-        <ListBox Name="Main" ItemsSource="{Binding}" Style="{StaticResource ListBoxStyle}" />
-    </Grid>
+    <StackPanel>
+        <ListBox Name="Main" ItemsSource="{Binding}" Style="{StaticResource ListBoxStyle}" Height="300"/>
+        <TextBlock Text="{Binding RateOfRead}" Name="aaa" Height="20"/>
+    </StackPanel>
 </Window>

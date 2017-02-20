@@ -10,7 +10,7 @@ namespace ReadingBookManager
 	public class Book
 	{
 		public List<ReadingRecord> ReadingRecords=new List<ReadingRecord>();
-		private string totalPage;
+		public  string totalPage;
 		public string BookName { get; set; }
 		public string BookName2 { get; set; }
 		public string Icon { get; set; }

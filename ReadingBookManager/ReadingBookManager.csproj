@@ -49,6 +49,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Zzkluck.Algorithm">
+      <HintPath>..\..\Toys\Zzkluck.Algorithm\bin\Debug\Zzkluck.Algorithm.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

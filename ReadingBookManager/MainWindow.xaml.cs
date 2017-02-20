@@ -26,7 +26,8 @@ namespace ReadingBookManager
 		public MainWindow()
 		{
 			InitializeComponent();
-			Main.DataContext = MyBooks;
+			Main.DataContext = MyBookManager.ReadingBooks;
+			aaa.DataContext = MyBookManager;
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -40,8 +41,9 @@ namespace ReadingBookManager
 			foreach (XmlNode node in Books)
 			{
 				Book book = Book.ReadFromXml(node);
-				MyBooks.Add(book);
+				MyBookManager.ReadingBooks.Add(book);
 			}
+			MyBookManager.Flush();
 			
 		}
 
