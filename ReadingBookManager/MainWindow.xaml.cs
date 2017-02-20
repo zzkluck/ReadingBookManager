@@ -22,7 +22,7 @@ namespace ReadingBookManager
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		ObservableCollection<Book> MyBooks = new ObservableCollection<Book>();
+		BookManager MyBookManager = new BookManager();
 		public MainWindow()
 		{
 			InitializeComponent();
