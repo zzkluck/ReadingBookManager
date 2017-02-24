@@ -27,7 +27,7 @@ namespace ReadingBookManager
 		{
 			InitializeComponent();
 			Main.DataContext = MyBookManager.ReadingBooks;
-			TxtblkRate.DataContext = MyBookManager;
+			StateBar.DataContext = MyBookManager;
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -40,6 +40,8 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <ListBox Name="Main" ItemsSource="{Binding}" Style="{StaticResource ListBoxStyle}"/>
-        <TextBlock Text="{Binding RateOfRead}" Name="TxtblkRate" Grid.Row="1"/>
-    </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Name="StateBar">
+            <TextBlock Text="{Binding RateOfRead}"/>
+        </StackPanel>
+        </Grid>
 </Window>
