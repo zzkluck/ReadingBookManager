@@ -41,7 +41,7 @@ namespace ReadingBookManager
 			int tp=0, trp=0;
 			foreach (Book book in ReadingBooks)
 			{
-				tp += Convert.ToInt32(book.totalPage);
+				tp += Convert.ToInt32(book.TotalPage);
 				trp += Convert.ToInt32(book.ReadPage);
 			}
 			TotalPage = tp.ToString();

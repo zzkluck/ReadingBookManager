@@ -10,7 +10,7 @@ namespace ReadingBookManager
 	public class Book
 	{
 		public List<ReadingRecord> ReadingRecords=new List<ReadingRecord>();
-		public  string totalPage;
+		public string TotalPage { get; set; }
 		public string BookName { get; set; }
 		public string BookName2 { get; set; }
 		public string Icon { get; set; }
@@ -27,7 +27,7 @@ namespace ReadingBookManager
 		public string RateOfProgress {
 			get
 			{
-				return string.Format("( {0} / {1} ）", ReadPage, totalPage);
+				return string.Format("( {0} / {1} ）", ReadPage, TotalPage);
 			}
 		}
 
@@ -38,7 +38,7 @@ namespace ReadingBookManager
 			Book thisBook = new Book();
 			thisBook.BookName = BookElement.Attributes["Name"].Value;
 			thisBook.BookName2 = BookElement.Attributes["Name2"].Value;
-			thisBook.totalPage = BookElement.Attributes["TotalPage"].Value;
+			thisBook.TotalPage = BookElement.Attributes["TotalPage"].Value;
 			thisBook.Position = BookElement.Attributes["Position"].Value;
 			thisBook.Icon = BookElement.Attributes["Icon"].Value;
 

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ReadingBookManager"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="MainWindow" Height="400" Width="525">
+        Title="MainWindow" Height="600" Width="1024">
     <Window.Resources>
         <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
             <Setter Property="ItemTemplate">
@@ -15,10 +15,18 @@
                         <StackPanel Orientation="Horizontal" Margin="5">
                             <Image Source="{Binding Icon}" Height="50" Width="50" Margin="5"/>
                             <StackPanel>
-                                <TextBlock Text="{Binding BookName}"/>
-                                <TextBlock Text="{Binding BookName2}"/>
-                                <TextBlock Text="{Binding RateOfProgress}"/>
-                                <TextBlock Text="{Binding Position}"/>
+                                <TextBlock Text="{Binding BookName}" FontSize="24"/>
+                                <TextBlock Text="{Binding BookName2}" FontSize="16"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <ProgressBar Maximum="{Binding TotalPage,Mode=OneWay}" 
+                                             Value="{Binding ReadPage,Mode=OneWay}"
+                                             Height="10" Width="{Binding TotalPage}"
+                                             HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding TotalPage}" 
+                                               FontSize="16" FontWeight="Medium" Foreground="Green"
+                                               Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Position}" FontSize="12" FontWeight="Light"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
@@ -26,8 +34,12 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <StackPanel>
-        <ListBox Name="Main" ItemsSource="{Binding}" Style="{StaticResource ListBoxStyle}" Height="300"/>
-        <TextBlock Text="{Binding RateOfRead}" Name="aaa" Height="20"/>
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <ListBox Name="Main" ItemsSource="{Binding}" Style="{StaticResource ListBoxStyle}"/>
+        <TextBlock Text="{Binding RateOfRead}" Name="TxtblkRate" Grid.Row="1"/>
+    </Grid>
 </Window>
