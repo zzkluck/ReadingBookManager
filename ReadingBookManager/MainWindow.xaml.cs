@@ -32,7 +32,7 @@ namespace ReadingBookManager
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			string path = @"C:\Users\admin\Desktop\ReadingBooks.xml";
+			string path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)+"\\ReadingBooks.xml";
 			XmlDocument xd = new XmlDocument();
 			xd.Load(path);
 			XmlElement rootNode = xd.DocumentElement;

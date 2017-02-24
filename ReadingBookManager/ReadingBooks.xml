@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Books>
+    <Book
+        Name="人工智能-复杂问题求解的结构与策略"
+        Name2="Artifical Intelligence-Structures and Strategies for Complex Problem Solving"
+        TotalPage="490"
+        Position="已借"
+        Icon="">
+        <ReadingRecord Page="43" Date="2017/2/18"></ReadingRecord>
+        <ReadingRecord Page="85" Date="2017/2/19"></ReadingRecord>
+        <ReadingRecord Page="135" Date="2017/2/21"></ReadingRecord>
+        <ReadingRecord Page="156" Date="2017/2/22"></ReadingRecord>
+    </Book>
+    <Book
+        Name="机器学习基础教程"
+        Name2="A First Course in Machine Learning"
+        TotalPage="184"
+        Position="明德馆四楼西区'"
+        Icon="">
+         <ReadingRecord Page="28" Date="2017/2/18"></ReadingRecord>
+    </Book>
+     <Book
+        Name="C#与F#编程实践"
+        Name2="Real-World Functional Programming With Examples in F# and C#"
+        TotalPage="541"
+        Position="已借"
+        Icon="">
+         <ReadingRecord Page="40" Date="2017/2/20"></ReadingRecord>
+         <ReadingRecord Page="63" Date="2017/2/22"></ReadingRecord>
+    </Book>
+     <Book
+        Name="空中航行专业英语"
+        Name2="Technical English for Air Nevigation"
+        TotalPage="277"
+        Position="自己的书"
+        Icon="">
+         <ReadingRecord Page="2" Date="2017/2/20"></ReadingRecord>
+    </Book>
+     <Book
+        Name="空中交通系统优化与管理"
+        Name2="运筹学"
+        TotalPage="249"
+        Position="自己的书"
+        Icon="">
+         <ReadingRecord Page="27" Date="2017/2/19"></ReadingRecord>
+    </Book>
+     <Book
+        Name="空中导航"
+        Name2="领航学"
+        TotalPage="287"
+        Position="自己的书"
+        Icon="">
+         <ReadingRecord Page="19" Date="2017/2/20"></ReadingRecord>
+    </Book>
+    <Book
+        Name="HTML5实战"
+        Name2="HTML5 In Action"
+        TotalPage="413"
+        Position="明德馆四楼西区"
+        Icon="">
+    </Book>
+    <Book
+        Name="HTML5与CSS3网页设计基础（第二版）"
+        Name2="Bassics of Web Design: HTML5 and CSS3, Second Edition"
+        TotalPage="355"
+        Position="已借"
+        Icon="C:\Users\admin\Desktop\IMG_4938.JPG">
+        <ReadingRecord Page="40" Date="2017/2/22"></ReadingRecord>
+        <ReadingRecord Page="148" Date="2017/2/23"></ReadingRecord>
+    </Book>
+</Books>
