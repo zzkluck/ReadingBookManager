@@ -13,7 +13,7 @@
                 <Setter.Value>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="5">
-                            <Image Source="{Binding Icon}"/>
+                            <Image Source="{Binding Icon}" Height="50" Width="50" Margin="5"/>
                             <StackPanel>
                                 <TextBlock Text="{Binding BookName}"/>
                                 <TextBlock Text="{Binding BookName2}"/>

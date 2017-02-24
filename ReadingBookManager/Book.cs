@@ -40,6 +40,7 @@ namespace ReadingBookManager
 			thisBook.BookName2 = BookElement.Attributes["Name2"].Value;
 			thisBook.totalPage = BookElement.Attributes["TotalPage"].Value;
 			thisBook.Position = BookElement.Attributes["Position"].Value;
+			thisBook.Icon = BookElement.Attributes["Icon"].Value;
 
 			XmlNodeList XmlReadingRecordings = BookElement.ChildNodes;
 			foreach (XmlNode item in XmlReadingRecordings)
