@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ReadingBookManager"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="MainWindow" Height="600" Width="1024">
+        Title="ReadingBookManager" Height="600" Width="1024"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
             <Setter Property="ItemTemplate">
@@ -35,13 +36,20 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-        <ListBox Name="Main" ItemsSource="{Binding}" Style="{StaticResource ListBoxStyle}"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Name="StateBar">
-            <TextBlock Text="{Binding RateOfRead}"/>
-        </StackPanel>
+        <Grid Name="GridMain">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+
+            <ListBox Name="LstBxBooks" ItemsSource="{Binding}" Style="{StaticResource ListBoxStyle}" 
+                 ScrollViewer.CanContentScroll="True"/>
+            <!--ListBox的ScrollViewer.CanContentScroll这个属性指定了滚动条的行为，当值为True是以Item为单位进行滚动。True是默认行为-->
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Name="StateBar" HorizontalAlignment="Right">
+                <TextBlock Text="{Binding RateOfRead}"/>
+                <ProgressBar Maximum="{Binding TotalPage}" Value="{Binding TotalReadPage}" Width="200"></ProgressBar>
+            </StackPanel>
         </Grid>
+    </Grid>
 </Window>

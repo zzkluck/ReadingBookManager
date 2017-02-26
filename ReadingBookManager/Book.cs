@@ -9,44 +9,45 @@ namespace ReadingBookManager
 {
 	public class Book
 	{
-		public List<ReadingRecord> ReadingRecords=new List<ReadingRecord>();
-		public string TotalPage { get; set; }
 		public string BookName { get; set; }
 		public string BookName2 { get; set; }
 		public string Icon { get; set; }
 		public string Position { get; set; }
-		public string ReadPage{
+		public int TotalPage { get; set; }
+		public List<ReadingRecord> ReadingRecords = new List<ReadingRecord>();
+		public int ReadPage{
 			get
 			{
 				if (ReadingRecords.Count == 0)
-					return "0";
+					return 0;
 				else
 					return ReadingRecords[ReadingRecords.Count - 1].ReadPage;
 			}
 		}
-		public string RateOfProgress {
-			get
-			{
-				return string.Format("( {0} / {1} ）", ReadPage, TotalPage);
-			}
-		}
 
+		/// <summary>
+		/// 从Book节点读取信息的通用方法
+		/// </summary>
+		/// <param name="BookElement"></param>
+		/// <returns>返回值是一个Book类的实例</returns>
 		public static Book ReadFromXml(XmlNode BookElement)
 		{
 			if (BookElement.Name != "Book")
-				throw new ArgumentException();
+				throw new ArgumentException("错误的Xml节点，请检查是否以正确的方式调用了Book.ReadFromXml函数");
 			Book thisBook = new Book();
 			thisBook.BookName = BookElement.Attributes["Name"].Value;
 			thisBook.BookName2 = BookElement.Attributes["Name2"].Value;
-			thisBook.TotalPage = BookElement.Attributes["TotalPage"].Value;
+			thisBook.TotalPage = Convert.ToInt32(BookElement.Attributes["TotalPage"].Value);
 			thisBook.Position = BookElement.Attributes["Position"].Value;
 			thisBook.Icon = BookElement.Attributes["Icon"].Value;
 
 			XmlNodeList XmlReadingRecordings = BookElement.ChildNodes;
 			foreach (XmlNode item in XmlReadingRecordings)
 			{
-				thisBook.ReadingRecords.Add(
-					new ReadingRecord(item.Attributes["Page"].Value, item.Attributes["Date"].Value));
+				if(item.Name=="ReadingRecord")
+					thisBook.ReadingRecords.Add(
+						new ReadingRecord(Convert.ToInt32(item.Attributes["Page"].Value), 
+											DateTime.Parse(item.Attributes["Date"].Value)));
 			}
 			return thisBook;
 		}
@@ -54,12 +55,12 @@ namespace ReadingBookManager
 
 	public class ReadingRecord
 	{
-		public ReadingRecord(string r,string d)
+		public ReadingRecord(int r,DateTime d)
 		{
 			ReadPage = r;
 			Date = d;
 		}
-		public string ReadPage;
-		public string Date;
+		public int ReadPage;
+		public DateTime Date;
 	}
 }

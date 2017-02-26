@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,26 +27,14 @@ namespace ReadingBookManager
 		public MainWindow()
 		{
 			InitializeComponent();
-			Main.DataContext = MyBookManager.ReadingBooks;
+			LstBxBooks.DataContext = MyBookManager.ReadingBooks;
 			StateBar.DataContext = MyBookManager;
-		}
-
+			SplashScreen ss = new SplashScreen("Loading.png");
+			ss.Show(true);
+		}	
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			string path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)+"\\ReadingBooks.xml";
-			XmlDocument xd = new XmlDocument();
-			xd.Load(path);
-			XmlElement rootNode = xd.DocumentElement;
-			XmlNodeList Books = rootNode.GetElementsByTagName("Book");
-
-			foreach (XmlNode node in Books)
-			{
-				Book book = Book.ReadFromXml(node);
-				MyBookManager.ReadingBooks.Add(book);
-			}
-			MyBookManager.Flush();
-			
+			MyBookManager.ReadFromXml();
 		}
-
 	}
 }
