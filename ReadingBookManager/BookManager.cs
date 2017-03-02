@@ -15,11 +15,16 @@ namespace ReadingBookManager
 			Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\ReadingBooks.xml";
 		public string User { get; set; }
 
-		public ObservableCollection<Book> ReadingBooks=new ObservableCollection<Book>();
+		public ObservableCollection<Book> 
+			ReadingBooks = new ObservableCollection<Book>();
+		public ObservableCollection<ReadingRecordByPage> 
+			ReadingRecordsList = new ObservableCollection<ReadingRecordByPage>();
 
 		private int totalPage;
 		private int totalReadPage;
 		private string rateOfRead;
+
+		#region Functions
 		public int TotalPage
 		{
 			get { return totalPage; }
@@ -69,6 +74,40 @@ namespace ReadingBookManager
 			this.Flush();
 		}
 
+		#endregion
 
+		public void GetReadingRecordByPage()
+		{
+			foreach(Book book in ReadingBooks)
+			{
+				if(book.ReadingRecords.Count!=0)
+					ReadingRecordsList.Add(new ReadingRecordByPage(book.ReadingRecords[0], book.BookName));
+				for(int i = 1; i < book.ReadingRecords.Count; i++)
+				{
+					ReadingRecordsList.Add(new ReadingRecordByPage
+						(book.ReadingRecords[i - 1], book.ReadingRecords[i], book.BookName));
+				}
+			}
+		}
+	}
+
+	public class ReadingRecordByPage
+	{
+		public ReadingRecordByPage(DateTime date,int readPage,string bookName)
+		{
+			this.Date = date;
+			this.ReadPage = readPage;
+			this.BookName = bookName;
+		}
+		public ReadingRecordByPage(ReadingRecordByBook bookRecord1,ReadingRecordByBook bookRecord2, string bookName)
+			:this(bookRecord2.Date, bookRecord2.ReadPage - bookRecord1.ReadPage, bookName)
+		{}
+		public ReadingRecordByPage(ReadingRecordByBook firstBookRecord,string bookName):
+			this(firstBookRecord.Date,firstBookRecord.ReadPage,bookName)
+		{}
+		public DateTime Date { get; set; }
+		public string DateString { get { return Date.ToShortDateString(); } }
+		public int ReadPage { get; set; }
+		public string BookName { get; set; }
 	}
 }

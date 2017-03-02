@@ -6,17 +6,18 @@
         xmlns:local="clr-namespace:ReadingBookManager"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
+        KeyDown="Window_KeyDown"
         Title="ReadingBookManager" Height="600" Width="1024"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
+        <Style x:Key="ListBoxBooksStyle" TargetType="{x:Type ListBox}">
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="5">
                             <Image Source="{Binding Icon}" Height="50" Width="50" Margin="5"/>
                             <StackPanel>
-                                <TextBlock Text="{Binding BookName}" FontSize="24"/>
+                                <TextBlock Name="TbkBookName" Text="{Binding BookName}" FontSize="24"/>
                                 <TextBlock Text="{Binding BookName2}" FontSize="16"/>
                                 <StackPanel Orientation="Horizontal">
                                     <ProgressBar Maximum="{Binding TotalPage,Mode=OneWay}" 
@@ -42,9 +43,31 @@
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
-            <ListBox Name="LstBxBooks" ItemsSource="{Binding}" Style="{StaticResource ListBoxStyle}" 
+            <ListBox Name="LstBxBooks" ItemsSource="{Binding}" Style="{StaticResource ListBoxBooksStyle}" 
                  ScrollViewer.CanContentScroll="True"/>
             <!--ListBox的ScrollViewer.CanContentScroll这个属性指定了滚动条的行为，当值为True是以Item为单位进行滚动。True是默认行为-->
+
+            <ListView Name="LstVwReadingRecords" ItemsSource="{Binding}" Visibility="Collapsed">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding BookName}">
+                            <HeaderedContentControl>
+                                <Button Name="HeaderBookName" Content="BookName" Click="ButtonHeader_Click"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding ReadPage}">
+                            <HeaderedContentControl>
+                                <Button Name="HeaderPage" Content="Page" Click="ButtonHeader_Click"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding DateString}">
+                            <HeaderedContentControl>
+                                <Button Name="HeaderDate" Content="Date" Click="ButtonHeader_Click"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
             <StackPanel Orientation="Horizontal" Grid.Row="1" Name="StateBar" HorizontalAlignment="Right">
                 <TextBlock Text="{Binding RateOfRead}"/>

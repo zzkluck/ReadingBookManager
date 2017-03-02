@@ -28,13 +28,54 @@ namespace ReadingBookManager
 		{
 			InitializeComponent();
 			LstBxBooks.DataContext = MyBookManager.ReadingBooks;
+			LstVwReadingRecords.DataContext = MyBookManager.ReadingRecordsList;
 			StateBar.DataContext = MyBookManager;
 			SplashScreen ss = new SplashScreen("Loading.png");
 			ss.Show(true);
-		}	
+		}
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			MyBookManager.ReadFromXml();
+			MyBookManager.GetReadingRecordByPage();
+		}
+
+		private void ButtonHeader_Click(object sender, RoutedEventArgs e)
+		{
+			switch ((sender as FrameworkElement).Name)
+			{
+				case "HeaderBookName":
+					LstVwReadingRecords.DataContext =
+				MyBookManager.ReadingRecordsList.OrderBy((ReadingRecordByPage r) => r.BookName);
+					break;
+				case "HeaderPage":
+					LstVwReadingRecords.DataContext =
+				MyBookManager.ReadingRecordsList.OrderBy((ReadingRecordByPage r) => r.ReadPage);
+					break;
+				case "HeaderDate":
+					LstVwReadingRecords.DataContext =
+				MyBookManager.ReadingRecordsList.OrderBy((ReadingRecordByPage r) => r.Date);
+					break;
+				default:
+					throw new Exception("Somethins error");
+			}
+		}
+
+		private void Window_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				if (LstBxBooks.Visibility == Visibility)
+					LstBxBooks.Visibility = Visibility.Collapsed;
+				else
+					LstBxBooks.Visibility = Visibility.Visible;
+
+				if (LstVwReadingRecords.Visibility == Visibility.Visible)
+					LstVwReadingRecords.Visibility = Visibility.Collapsed;
+				else
+					LstVwReadingRecords.Visibility = Visibility.Visible;
+
+			}
 		}
 	}
 }
+

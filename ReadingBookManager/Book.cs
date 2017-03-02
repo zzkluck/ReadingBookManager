@@ -14,7 +14,7 @@ namespace ReadingBookManager
 		public string Icon { get; set; }
 		public string Position { get; set; }
 		public int TotalPage { get; set; }
-		public List<ReadingRecord> ReadingRecords = new List<ReadingRecord>();
+		public List<ReadingRecordByBook> ReadingRecords = new List<ReadingRecordByBook>();
 		public int ReadPage{
 			get
 			{
@@ -46,16 +46,16 @@ namespace ReadingBookManager
 			{
 				if(item.Name=="ReadingRecord")
 					thisBook.ReadingRecords.Add(
-						new ReadingRecord(Convert.ToInt32(item.Attributes["Page"].Value), 
+						new ReadingRecordByBook(Convert.ToInt32(item.Attributes["Page"].Value), 
 											DateTime.Parse(item.Attributes["Date"].Value)));
 			}
 			return thisBook;
 		}
 	}
 
-	public class ReadingRecord
+	public class ReadingRecordByBook
 	{
-		public ReadingRecord(int r,DateTime d)
+		public ReadingRecordByBook(int r,DateTime d)
 		{
 			ReadPage = r;
 			Date = d;
