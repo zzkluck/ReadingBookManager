@@ -36,8 +36,8 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid>
-        <Grid Name="GridMain">
+    
+    <Grid Name="GridMain">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="20"/>
@@ -47,20 +47,34 @@
                  ScrollViewer.CanContentScroll="True"/>
             <!--ListBox的ScrollViewer.CanContentScroll这个属性指定了滚动条的行为，当值为True是以Item为单位进行滚动。True是默认行为-->
 
-            <ListView Name="LstVwReadingRecords" ItemsSource="{Binding}" Visibility="Collapsed">
+            <ListView Name="LstVwReadingRecords" ItemsSource="{Binding}" Visibility="Collapsed" Background="LightGray">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="FontSize" Value="24"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Style.Triggers>
+                           <Trigger Property="IsMouseOver" Value="True">
+                              <Setter Property="FontSize" Value="30"/>
+                              <Setter Property="Foreground" Value="White"/>
+                              <Setter Property="Background" Value="Black"/>
+                           </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding BookName}">
+                        <GridViewColumn DisplayMemberBinding="{Binding BookName}" Width="600">
                             <HeaderedContentControl>
                                 <Button Name="HeaderBookName" Content="BookName" Click="ButtonHeader_Click"/>
                             </HeaderedContentControl>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding ReadPage}">
+                        <GridViewColumn DisplayMemberBinding="{Binding ReadPage}" Width="200">
                             <HeaderedContentControl>
                                 <Button Name="HeaderPage" Content="Page" Click="ButtonHeader_Click"/>
                             </HeaderedContentControl>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding DateString}">
+                        <GridViewColumn DisplayMemberBinding="{Binding DateString}" Width="200">
                             <HeaderedContentControl>
                                 <Button Name="HeaderDate" Content="Date" Click="ButtonHeader_Click"/>
                             </HeaderedContentControl>
@@ -74,5 +88,4 @@
                 <ProgressBar Maximum="{Binding TotalPage}" Value="{Binding TotalReadPage}" Width="200"></ProgressBar>
             </StackPanel>
         </Grid>
-    </Grid>
 </Window>
