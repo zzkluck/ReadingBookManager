@@ -41,17 +41,18 @@ namespace ReadingBookManager
 
 		private void ButtonHeader_Click(object sender, RoutedEventArgs e)
 		{
-			switch ((sender as FrameworkElement).Name)
+            GridViewColumn gvc = (e.OriginalSource as GridViewColumnHeader).Column;
+			switch (gvc.Header.ToString())
 			{
-				case "HeaderBookName":
+				case "BookName":
 					LstVwReadingRecords.DataContext =
 				MyBookManager.ReadingRecordsList.OrderBy((ReadingRecordByPage r) => r.BookName);
 					break;
-				case "HeaderPage":
+				case "Page":
 					LstVwReadingRecords.DataContext =
 				MyBookManager.ReadingRecordsList.OrderBy((ReadingRecordByPage r) => r.ReadPage);
 					break;
-				case "HeaderDate":
+				case "Date":
 					LstVwReadingRecords.DataContext =
 				MyBookManager.ReadingRecordsList.OrderBy((ReadingRecordByPage r) => r.Date);
 					break;
@@ -64,18 +65,10 @@ namespace ReadingBookManager
 		{
 			if (e.Key == Key.Enter)
 			{
-				if (LstBxBooks.Visibility == Visibility)
-					LstBxBooks.Visibility = Visibility.Collapsed;
-				else
-					LstBxBooks.Visibility = Visibility.Visible;
-
-				if (LstVwReadingRecords.Visibility == Visibility.Visible)
-					LstVwReadingRecords.Visibility = Visibility.Collapsed;
-				else
-					LstVwReadingRecords.Visibility = Visibility.Visible;
-
+				LstBxBooks.Visibility = (LstBxBooks.Visibility == Visibility) ? Visibility.Collapsed : Visibility.Visible;
+				LstVwReadingRecords.Visibility = (LstVwReadingRecords.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 			}
 		}
-	}
+    }
 }
 

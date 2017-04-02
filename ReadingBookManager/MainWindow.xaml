@@ -13,12 +13,12 @@
         <Style x:Key="ListBoxBooksStyle" TargetType="{x:Type ListBox}">
             <Setter Property="ItemTemplate">
                 <Setter.Value>
-                    <DataTemplate>
+                    <DataTemplate DataType="ListBoxItem">
                         <StackPanel Orientation="Horizontal" Margin="5">
-                            <Image Source="{Binding Icon}" Height="50" Width="50" Margin="5"/>
+                            <Image Source="{Binding Icon}" Height="50" Width="50" Margin="5" Visibility="Collapsed" Name="Icon"/>
                             <StackPanel>
                                 <TextBlock Name="TbkBookName" Text="{Binding BookName}" FontSize="24"/>
-                                <TextBlock Text="{Binding BookName2}" FontSize="16"/>
+                                <TextBlock Text="{Binding BookName2}" FontSize="16" Visibility="Collapsed" Name="TbkBookName2"/>
                                 <StackPanel Orientation="Horizontal">
                                     <ProgressBar Maximum="{Binding TotalPage,Mode=OneWay}" 
                                              Value="{Binding ReadPage,Mode=OneWay}"
@@ -28,64 +28,65 @@
                                                FontSize="16" FontWeight="Medium" Foreground="Green"
                                                Margin="10,0,0,0"/>
                                 </StackPanel>
-                                <TextBlock Text="{Binding Position}" FontSize="12" FontWeight="Light"/>
+                                <TextBlock Text="{Binding Position}" FontSize="12" FontWeight="Light" Visibility="Collapsed" Name="TbkPosition"/>
                             </StackPanel>
                         </StackPanel>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding
+                                RelativeSource={RelativeSource
+                                Mode=FindAncestor,
+                                AncestorType={x:Type ListBoxItem}},
+                                Path=IsSelected}"
+                        Value="True">
+                                <Setter Property="Image.Visibility" TargetName="Icon" Value="Visible"/>
+                                <Setter Property="TextBlock.Visibility" TargetName="TbkBookName2" Value="Visible"/>
+                                <Setter Property="Image.Visibility" TargetName="TbkPosition" Value="Visible"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Resources>
-    
+
     <Grid Name="GridMain">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="20"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
 
-            <ListBox Name="LstBxBooks" ItemsSource="{Binding}" Style="{StaticResource ListBoxBooksStyle}" 
-                 ScrollViewer.CanContentScroll="True"/>
-            <!--ListBox的ScrollViewer.CanContentScroll这个属性指定了滚动条的行为，当值为True是以Item为单位进行滚动。True是默认行为-->
+        <ListBox Name="LstBxBooks" ItemsSource="{Binding}" Style="{StaticResource ListBoxBooksStyle}" 
+                 ScrollViewer.CanContentScroll="False"/>
+        <!--ListBox的ScrollViewer.CanContentScroll这个属性指定了滚动条的行为，当值为True是以Item为单位进行滚动。True是默认行为-->
 
-            <ListView Name="LstVwReadingRecords" ItemsSource="{Binding}" Visibility="Collapsed" Background="LightGray">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="FontSize" Value="24"/>
-                        <Setter Property="Foreground" Value="Black"/>
-                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                        <Style.Triggers>
-                           <Trigger Property="IsMouseOver" Value="True">
-                              <Setter Property="FontSize" Value="30"/>
-                              <Setter Property="Foreground" Value="White"/>
-                              <Setter Property="Background" Value="Black"/>
-                           </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding BookName}" Width="600">
-                            <HeaderedContentControl>
-                                <Button Name="HeaderBookName" Content="BookName" Click="ButtonHeader_Click"/>
-                            </HeaderedContentControl>
-                        </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding ReadPage}" Width="200">
-                            <HeaderedContentControl>
-                                <Button Name="HeaderPage" Content="Page" Click="ButtonHeader_Click"/>
-                            </HeaderedContentControl>
-                        </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding DateString}" Width="200">
-                            <HeaderedContentControl>
-                                <Button Name="HeaderDate" Content="Date" Click="ButtonHeader_Click"/>
-                            </HeaderedContentControl>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+        <ListView Name="LstVwReadingRecords" ItemsSource="{Binding}" Visibility="Collapsed" Background="LightGray"
+                     GridViewColumnHeader.Click="ButtonHeader_Click">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="FontSize" Value="24"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="FontSize" Value="30"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding BookName}" Width="600" Header="BookName"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ReadPage}" Width="200" Header="Page"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding DateString}" Width="200" Header="Date"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Name="StateBar" HorizontalAlignment="Right">
-                <TextBlock Text="{Binding RateOfRead}"/>
-                <ProgressBar Maximum="{Binding TotalPage}" Value="{Binding TotalReadPage}" Width="200"></ProgressBar>
-            </StackPanel>
-        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Name="StateBar" HorizontalAlignment="Right">
+            <TextBlock Text="{Binding RateOfRead}"/>
+            <ProgressBar Maximum="{Binding TotalPage}" Value="{Binding TotalReadPage}" Width="200"></ProgressBar>
+        </StackPanel>
+    </Grid>
 </Window>
