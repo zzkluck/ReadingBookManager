@@ -45,6 +45,19 @@ namespace ReadingBookManager
             else
                 FrameMain.Navigate(new BookListBox());
         }
+        public void ButtonDrived_FrameNavigate(object sender, RoutedEventArgs e)
+        {
+            Button senderButton = sender as Button;
+            switch (senderButton.Name)
+            {
+                case "ReadingBookManagerNavigateButton":
+                    FrameMain.Navigate(new BookListBox());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
+
 }
 

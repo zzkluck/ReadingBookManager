@@ -16,11 +16,13 @@
         <Image Source="Assets/22.jpg" Stretch="Fill" Grid.RowSpan="3"/>
         <StackPanel HorizontalAlignment="Right" Grid.Row="1">
             <Button Style="{StaticResource RightSideButton}" 
+                Name="ReadingBookManagerNavigateButton"
                 Grid.Row="1" 
                 Background="#20efefef"
                 FontSize="36"
                 FontFamily="方正舒体"
                 Width="300" Height="40"
+                Click="Button_Click"
                 >书籍阅读管理</Button>
         </StackPanel>
         

@@ -24,5 +24,10 @@ namespace ReadingBookManager
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            (Application.Current.MainWindow as MainWindow).ButtonDrived_FrameNavigate(sender, e);
+        }
     }
 }
