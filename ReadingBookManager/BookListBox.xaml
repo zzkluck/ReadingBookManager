@@ -1,0 +1,53 @@
+﻿<Page x:Class="ReadingBookManager.BookListBox"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ReadingBookManager"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="BookListBox">
+    <Page.Resources>
+        <Style x:Key="ListBoxBooksStyle" TargetType="{x:Type ListBox}">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="ListBoxItem">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Image Source="{Binding Icon}" Height="50" Width="50" Margin="5" Visibility="Collapsed" Name="Icon"/>
+                            <StackPanel>
+                                <TextBlock Name="TbkBookName" Text="{Binding BookName}" FontSize="24"/>
+                                <TextBlock Text="{Binding BookName2}" FontSize="16" Visibility="Collapsed" Name="TbkBookName2"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <ProgressBar Maximum="{Binding TotalPage,Mode=OneWay}" 
+                                             Value="{Binding ReadPage,Mode=OneWay}"
+                                             Height="10" Width="{Binding TotalPage}"
+                                             HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding TotalPage}" 
+                                               FontSize="16" FontWeight="Medium" Foreground="Green"
+                                               Margin="10,0,0,0"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Position}" FontSize="12" FontWeight="Light" Visibility="Collapsed" Name="TbkPosition"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding
+                                RelativeSource={RelativeSource
+                                Mode=FindAncestor,
+                                AncestorType={x:Type ListBoxItem}},
+                                Path=IsSelected}"
+                        Value="True">
+                                <Setter Property="Image.Visibility" TargetName="Icon" Value="Visible"/>
+                                <Setter Property="TextBlock.Visibility" TargetName="TbkBookName2" Value="Visible"/>
+                                <Setter Property="Image.Visibility" TargetName="TbkPosition" Value="Visible"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <ListBox Name="LstBxBooks" ItemsSource="{Binding}" Style="{StaticResource ListBoxBooksStyle}" 
+                 ScrollViewer.CanContentScroll="False"/>
+    </Grid>
+</Page>

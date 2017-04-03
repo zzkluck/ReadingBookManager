@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:ReadingBookManager"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="Dictionary1.xaml"/>
     </Application.Resources>
 </Application>
