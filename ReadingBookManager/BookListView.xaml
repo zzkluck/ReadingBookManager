@@ -22,7 +22,7 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <ListView Name="LstVwReadingRecords" ItemsSource="{Binding}" Background="LightGray"
+        <ListView Name="LstVwReadingRecords" ItemsSource="{Binding}" Background="LightGray" HorizontalAlignment="Left"
                      GridViewColumnHeader.Click="ButtonHeader_Click" ItemContainerStyle="{StaticResource LIst2Style}" >
             <ListView.View>
                 <GridView>

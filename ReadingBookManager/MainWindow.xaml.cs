@@ -53,6 +53,9 @@ namespace ReadingBookManager
                 case "ReadingBookManagerNavigateButton":
                     FrameMain.Navigate(new BookListBox());
                     break;
+                case "PhysicsSimulationNavigateButton":
+                    FrameMain.Navigate(new PhysicsSimulation());
+                    break;
                 default:
                     break;
             }

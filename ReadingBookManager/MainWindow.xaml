@@ -8,11 +8,11 @@
         Title="ReadingBookManager"
         Loaded="Window_Loaded"
         KeyDown="Window_KeyDown"
-        Height="600" Width="1024"
+        MinHeight="768" MinWidth="1024"
         WindowStartupLocation="CenterScreen">
     <Grid Name="GridMain">
         <Frame Name="FrameMain" Source="StartPage.xaml" NavigationUIVisibility="Hidden"/>
-        <StatusBar VerticalAlignment="Bottom">
+        <StatusBar VerticalAlignment="Bottom" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal" Name="StatusRateOfRead">
                 <ProgressBar Maximum="{Binding TotalPage}" Value="{Binding TotalReadPage}" Width="200"/>
                 <TextBlock Text="{Binding RateOfRead}"/>

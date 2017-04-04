@@ -1,0 +1,212 @@
+﻿<Page x:Class="ReadingBookManager.PhysicsSimulation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ReadingBookManager"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1024"
+      Title="PhysicsSimulation">
+    <Page.Resources>
+        <Style TargetType="{x:Type TextBlock}" x:Key="PropertyListTitleStyle">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontWeight" Value="ExtraLight"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}" x:Key="PropertyNameStyle">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}" x:Key="TitleInCanvasStyle">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Bradley Hand ITC"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" x:Key="PropertyValueStyle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+            <Setter Property="Width" Value="100"/>
+        </Style>
+        <Style TargetType="StackPanel" x:Key="PropertyKeyValueStyle">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0,5,10,0"/>
+        </Style>
+        <Style TargetType="Button" x:Key="StandardButtonStyle">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+    </Page.Resources>
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Name="ConnonPropertiesStackPanel" Grid.Row="0">
+                <TextBlock Style="{StaticResource PropertyListTitleStyle}">
+                    ConnonProperties
+                </TextBlock>
+                <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                    <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Vm
+                    </TextBlock>
+                    <TextBox Name="InitalizingVelocityTextBox" 
+                        Style="{StaticResource PropertyValueStyle}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                    <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Alpha
+                    </TextBlock>
+                    <TextBox Name="AngelAlphaTextBox"
+                        Style="{StaticResource PropertyValueStyle}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                    <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Gamma
+                    </TextBlock>
+                    <TextBox  Name="AngelGammaTextBox"
+                        Style="{StaticResource PropertyValueStyle}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                    <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        L
+                    </TextBlock>
+                    <TextBox Name="CononLengthTextBox"
+                        Style="{StaticResource PropertyValueStyle}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                    <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Yb
+                    </TextBlock>
+                    <TextBox Name="CononHeightTextBox"
+                        Style="{StaticResource PropertyValueStyle}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Name="TargetPropertiesStackPanel" Grid.Row="1">
+                <TextBlock Style="{StaticResource PropertyListTitleStyle}">
+                    TargetProperties
+                </TextBlock>
+                <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                    <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        X
+                    </TextBlock>
+                    <TextBox Style="{StaticResource PropertyValueStyle}" />
+                </StackPanel>
+                <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                    <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Y
+                    </TextBlock>
+                    <TextBox Style="{StaticResource PropertyValueStyle}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                    <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Z
+                    </TextBlock>
+                    <TextBox Style="{StaticResource PropertyValueStyle}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                    <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Length
+                    </TextBlock>
+                    <TextBox Style="{StaticResource PropertyValueStyle}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                    <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Width
+                    </TextBlock>
+                    <TextBox Style="{StaticResource PropertyValueStyle}"/>
+                </StackPanel>
+                <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                    <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Height
+                    </TextBlock>
+                    <TextBox Style="{StaticResource PropertyValueStyle}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="2">
+                <Button Style="{StaticResource StandardButtonStyle}">Fire</Button>
+                <Button Style="{StaticResource StandardButtonStyle}">ReFresh</Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Canvas Grid.Row="0" Background="White" Margin="10,20,10,10">
+                <TextBlock Style="{StaticResource TitleInCanvasStyle}">TopView</TextBlock>
+            </Canvas>
+            <Canvas Grid.Row="1" Background="White" Margin="10,10,10,20">
+                <TextBlock Style="{StaticResource TitleInCanvasStyle}">SideView</TextBlock>
+            </Canvas>
+        </Grid>
+        <Grid Grid.Column="2">
+            <StackPanel>
+                <StackPanel Name="PhysicsPropertiesStackPanel">
+                    <TextBlock Style="{StaticResource PropertyListTitleStyle}"
+                               FontSize="20">
+                    PhysicsProperties
+                    </TextBlock>
+                    <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                        <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        m
+                        </TextBlock>
+                        <TextBox Style="{StaticResource PropertyValueStyle}"/>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                        <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Cd
+                        </TextBlock>
+                        <TextBox Style="{StaticResource PropertyValueStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Name="PhysicsPropertiesStackPanel2" Margin="0,20,0,0">
+                    <TextBlock Style="{StaticResource PropertyListTitleStyle}"
+                               FontSize="20">
+                    OtherProperties
+                    </TextBlock>
+                    <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                        <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Vw
+                        </TextBlock>
+                        <TextBox Style="{StaticResource PropertyValueStyle}"/>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                        <TextBlock Style="{StaticResource PropertyNameStyle}"
+                                   FontSize="15" FontWeight="Bold">
+                        GammaW
+                        </TextBlock>
+                        <TextBox Style="{StaticResource PropertyValueStyle}"/>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource PropertyKeyValueStyle}">
+                        <TextBlock Style="{StaticResource PropertyNameStyle}">
+                        Cw
+                        </TextBlock>
+                        <TextBox Style="{StaticResource PropertyValueStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <Button Style="{StaticResource StandardButtonStyle}" 
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,0,30">
+                Close
+            </Button>
+        </Grid>
+    </Grid>
+</Page>
