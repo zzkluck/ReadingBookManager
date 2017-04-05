@@ -45,6 +45,19 @@
             <Setter Property="Width" Value="100"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
+        <Style TargetType="Path" x:Key="flaringPathStyle">
+            <Setter Property="StrokeStartLineCap" Value="Round"/>
+            <Setter Property="StrokeEndLineCap" Value="Round"/>
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="3"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Stroke" Value="BlueViolet"/>
+                    <Setter Property="StrokeThickness" Value="5"/>
+                    <Setter Property="Panel.ZIndex" Value="1000"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
@@ -142,7 +155,7 @@
             </StackPanel>
             <StackPanel Grid.Row="2">
                 <Button Style="{StaticResource StandardButtonStyle}" Name="FireButton" Click="FireButton_Click">Fire</Button>
-                <Button Style="{StaticResource StandardButtonStyle}">ReFresh</Button>
+                <Button Style="{StaticResource StandardButtonStyle}" Name="ReFreshButton" Click="ReFreshButton_Click">ReFresh</Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
@@ -150,10 +163,10 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Canvas Grid.Row="0" Background="White" Margin="10,20,10,10" Name="TopViewCanvas">
+            <Canvas  Background="White" Margin="10,20,10,10" Name="TopViewCanvas">
                 <TextBlock Style="{StaticResource TitleInCanvasStyle}">TopView</TextBlock>
             </Canvas>
-            <Canvas Grid.Row="1" Background="White" Margin="10,10,10,20" Name="SideViewCanvas">
+            <Canvas Grid.Row="1" Background="White" Margin="10,10,10,20" Name="SideViewCanvas" >
                 <TextBlock Style="{StaticResource TitleInCanvasStyle}">SideView</TextBlock>
             </Canvas>
         </Grid>

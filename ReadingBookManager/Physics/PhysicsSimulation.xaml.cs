@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 using ReadingBookManager.Physics;
 
 namespace ReadingBookManager
@@ -25,42 +26,49 @@ namespace ReadingBookManager
         {
             InitializeComponent();
         }
-
-        private Line buildDefaultLine(double x1,double y1,double x2,double y2)
-        {
-            Line newLine = new Line();
-            newLine.X1 = x1;
-            newLine.X2 = x2;
-            newLine.Y1 = y1;
-            newLine.Y2 = y2;
-            newLine.Stroke = Brushes.Black;
-            newLine.StrokeThickness = 2;
-            return newLine;
-        }
-        private void addLineToCanvas(Line l,Canvas c)
-        {
-            if(l.Y2>c.Height||l.X2>c.Width||l.X2<0||l.Y2<0)
-            {
-                throw new NotImplementedException();
-            }
-            c.Children.Add(l);
-        }
         private void FireButton_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: 学习线程相关的知识，制作绘制线的动画
             MovmentCanon Canon = new MovmentCanon
                 (AngelAlphaTextBox.Text, AngelGammaTextBox.Text, CononLengthTextBox.Text, InitalizingVelocityTextBox.Text, CononHeightTextBox.Text);
-            int i = 1000;
             double t = 0;
-            Position previous = Canon.DisplacementEquation(0);
-            while(i-->0)
+            Position initialPosition = Canon.DisplacementEquation(0);
+            StringBuilder pathDescriptionSide = new StringBuilder();
+            pathDescriptionSide.AppendFormat("M {0},{1} L ", initialPosition.Item1, SideViewCanvas.ActualHeight-initialPosition.Item2);
+
+            while (true)
             {
-                Position now = Canon.DisplacementEquation(t);
-                t += 0.01;
-                
-                addLineToCanvas(buildDefaultLine(previous.Item1, previous.Item3+200, now.Item1, now.Item3+200), TopViewCanvas);
-                addLineToCanvas(buildDefaultLine(previous.Item1, previous.Item2, now.Item1, now.Item2), SideViewCanvas);
-                previous = now;
+                Position nowPosition = Canon.DisplacementEquation(t);
+                if (getStatus(nowPosition) != Status.Drawing)
+                    break;
+                t += 0.1;
+                pathDescriptionSide.AppendFormat("{0},{1} ", nowPosition.Item1, SideViewCanvas.ActualHeight - nowPosition.Item2);
             }
+            Path path = new Path();
+            path.Data = Geometry.Parse(pathDescriptionSide.ToString());           
+            path.Style = (Style)Resources["flaringPathStyle"];
+            SideViewCanvas.Children.Add(path);
+        }
+
+        private Status getStatus(Position p)
+        {
+            if (p.Item2 > SideViewCanvas.ActualHeight || p.Item1 > SideViewCanvas.ActualWidth || p.Item1 < 0 || p.Item2 < 0)
+                return Status.CrossTheBorder;
+            else
+                return Status.Drawing;
+        }
+
+        private void ReFreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            TopViewCanvas.Children.Clear();
+            SideViewCanvas.Children.Clear();
+        }
+
+        enum Status
+        {
+            Drawing,
+            Collision,
+            CrossTheBorder
         }
     }
 }

@@ -17,16 +17,20 @@ namespace ReadingBookManager.Physics
         private double cosX, cosY, cosZ;
 
         public MovmentCanon
-            (double angelAlpha,double angelGamma,double cononLength,double initalizingVelocity,double initalizingHeight)
+            (double angleAlpha,double angleGamma,double cononLength,double initalizingVelocity,double initalizingHeight)
         {
-            AngelAlpha = angelAlpha;
-            AngelGamma = angelGamma;
+            AngelAlpha = angleAlpha;
+            AngelGamma = angleGamma;
             CononLength = cononLength;
             InitalizingHeight = initalizingHeight;
             InitalizingVelocity = initalizingVelocity;
-            cosX = - Math.Sin(angelAlpha) * Math.Cos(angelGamma);
-            cosY=Math.Cos(angelAlpha);
-            cosZ = Math.Sin(angelAlpha) * Math.Sin(angelGamma);
+            cosX =  Math.Sin(angleToRadin(angleAlpha)) * Math.Cos(angleToRadin(angleGamma));
+            cosY=Math.Cos(angleToRadin(angleAlpha));
+            cosZ = Math.Sin(angleToRadin(angleAlpha)) * Math.Sin(angleToRadin(angleGamma));
+        }
+        private static double angleToRadin(double angleValue)
+        {
+            return angleValue * Math.PI / 180;
         }
 
         public MovmentCanon

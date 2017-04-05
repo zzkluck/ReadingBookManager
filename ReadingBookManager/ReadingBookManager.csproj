@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Physics\CustomExceptions.cs" />
     <Compile Include="Physics\Movment.cs" />
     <Compile Include="Physics\PhysicsSimulation.xaml.cs">
       <DependentUpon>PhysicsSimulation.xaml</DependentUpon>
